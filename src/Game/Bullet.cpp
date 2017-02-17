@@ -40,7 +40,7 @@ void Bullet::Update(float deltaTime) {
   lifeTimer -= deltaTime;
   mesh->Draw();
   if (lifeTimer < 0.0f) {
-    delete this; //TODO - REMOVE THIS
+    Destroy();
   }
 
 }

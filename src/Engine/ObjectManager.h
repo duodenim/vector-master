@@ -31,7 +31,10 @@ class ObjectManager {
   void Update();
  private:
   std::vector<GameObject*> objects;
-  std::vector<std::function<void(void)>> UpdateFunctions;
+  std::vector<GameObject*> destroyQueue;
+
+  void ClearDestroyQueue();
+  void Remove(GameObject* object);
 
 };
 

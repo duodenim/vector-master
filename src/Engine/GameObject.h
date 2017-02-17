@@ -20,6 +20,7 @@ class GameObject {
   virtual ~GameObject();
   virtual void Update(float deltaTime);
   virtual void Collision(GameObject* other);
+  void Destroy();
 };
 
 #endif //PONGGL_WORLDOBJECT_H

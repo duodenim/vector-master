@@ -8,12 +8,16 @@ GameObject::GameObject() {
 
 }
 GameObject::~GameObject() {
-  EngineCore::GetEngine()->GetObjectManager()->DestroyObject(this);
+
 }
 
 void GameObject::Update(float deltaTime) {
 
 }
 void GameObject::Collision(GameObject* other) {
-  
+
+}
+
+void GameObject::Destroy() {
+  EngineCore::GetEngine()->GetObjectManager()->DestroyObject(this);
 }
