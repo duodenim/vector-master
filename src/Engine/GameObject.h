@@ -18,7 +18,7 @@ class GameObject {
  public:
   GameObject();
   virtual ~GameObject();
-  virtual void Update();
+  virtual void Update(float deltaTime);
   virtual void Collision(GameObject* other);
 };
 

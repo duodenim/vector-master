@@ -30,6 +30,6 @@ Tube::~Tube(){
   delete mesh;
 }
 
-void Tube::Update() {
+void Tube::Update(float deltaTime) {
   mesh->Draw();
 }

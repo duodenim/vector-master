@@ -13,7 +13,7 @@ class Wall : public GameObject{
  public:
   Wall();
   ~Wall();
-  void Update();
+  void Update(float deltaTime);
   void SetPosition(glm::vec3 newPosition);
 
   CollisionBox2DComponent *cBox;

@@ -16,7 +16,7 @@ class Player : public GameObject {
  public:
   Player();
   ~Player();
-  void Update();
+  void Update(float deltaTime);
 
   void AddCollisionWatcher(CollisionBox2DComponent* box);
   void AddBulletCollisionWatcher(CollisionCircle2DComponent* box);

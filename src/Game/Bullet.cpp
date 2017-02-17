@@ -1,5 +1,4 @@
 #include "Bullet.h"
-#include "../Engine/EngineCore.h"
 #include <gtx/rotate_vector.hpp>
 
 GLfloat bulletVerts[] = {
@@ -36,10 +35,9 @@ Bullet::~Bullet() {
   delete cCircle;
 }
 
-void Bullet::Update() {
-  float delta = EngineCore::GetEngine()->deltaTime;
-  mesh->position += velocity * delta;
-  lifeTimer -= delta;
+void Bullet::Update(float deltaTime) {
+  mesh->position += velocity * deltaTime;
+  lifeTimer -= deltaTime;
   mesh->Draw();
   if (lifeTimer < 0.0f) {
     delete this; //TODO - REMOVE THIS

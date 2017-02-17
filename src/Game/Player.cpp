@@ -48,13 +48,11 @@ Player::~Player() {
   delete cBox;
   delete bulletHitBox;
 }
-void Player::Update() {
-  GameObject::Update();
+void Player::Update(float deltaTime) {
 
-  float time = EngineCore::GetEngine()->deltaTime;
   World *world = EngineCore::GetEngine()->GetWorld();
 
-  nextFireTime -= time;
+  nextFireTime -= deltaTime;
 
   int upKey = GLFW_KEY_W;
   int downKey = GLFW_KEY_S;
@@ -64,18 +62,18 @@ void Player::Update() {
   //Check collision on Y axis
   glm::vec3 lastPosition = cBox->position;
   if (iComponent->GetKeyState(upKey))
-    cBox->position.y += 0.001f * time * 1000;
+    cBox->position.y += 0.001f * deltaTime * 1000;
   if (iComponent->GetKeyState(downKey))
-    cBox->position.y -= 0.001f * time * 1000;
+    cBox->position.y -= 0.001f * deltaTime * 1000;
   if(cBox->CheckAllCollisions())
     cBox->position = lastPosition;
 
   //Check collision on X axis
   lastPosition = cBox->position;
   if (iComponent->GetKeyState(rightKey))
-    cBox->position.x += 0.001 * time * 1000;
+    cBox->position.x += 0.001 * deltaTime * 1000;
   if (iComponent->GetKeyState(leftKey))
-    cBox->position.x -= 0.001f * time * 1000;
+    cBox->position.x -= 0.001f * deltaTime * 1000;
   if (cBox->CheckAllCollisions())
     cBox->position = lastPosition;
 

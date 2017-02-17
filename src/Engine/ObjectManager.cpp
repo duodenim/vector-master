@@ -24,8 +24,9 @@ void ObjectManager::DestroyAllObjects() {
 }
 
 void ObjectManager::Update() {
+  float deltaTime = EngineCore::GetEngine()->deltaTime;
   for (int i = 0; i < objects.size(); i++) {
-    objects[i]->Update();
+    objects[i]->Update(deltaTime);
   }
 }
 

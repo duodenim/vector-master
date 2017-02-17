@@ -7,7 +7,7 @@ class Tube : public GameObject {
 public:
   Tube();
   ~Tube();
-  void Update();
+  void Update(float deltaTime);
 private:
   MeshComponent* mesh;
 };

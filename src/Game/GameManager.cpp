@@ -22,11 +22,9 @@ GameManager::~GameManager() {
   delete iComponent;
 
 }
-void GameManager::Update() {
-  GameObject::Update();
+void GameManager::Update(float deltaTime) {
   World* world = EngineCore::GetEngine()->GetWorld();
-  float time = EngineCore::GetEngine()->deltaTime;
-  totalTime += time;
+  totalTime += deltaTime;
   if(spawnBullet) {
     Bullet *bullet = world->SpawnObject<Bullet>();
     bullet->SetPosition(glm::vec3(0.0f, 0.4f, 0.0f));

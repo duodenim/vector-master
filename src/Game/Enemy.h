@@ -7,6 +7,6 @@ class Enemy : public GameObject {
 public:
   Enemy();
   ~Enemy();
-  void Update();
+  void Update(float deltaTime);
 };
 #endif

@@ -15,7 +15,7 @@ class GameManager : public GameObject{
  public:
   GameManager();
   ~GameManager();
-  void Update();
+  void Update(float deltaTime);
   void SetPlayer(Player* player);
  private:
   int player1Score;

@@ -24,8 +24,7 @@ Wall::~Wall() {
   delete mesh;
   delete cBox;
 }
-void Wall::Update() {
-  GameObject::Update();
+void Wall::Update(float deltaTime) {
   mesh->Draw();
 }
 void Wall::SetPosition(glm::vec3 newPosition) {

@@ -10,7 +10,7 @@ public:
   Bullet();
   ~Bullet();
 
-  void Update();
+  void Update(float deltaTime);
 
   void SetPosition(glm::vec3 pos);
 
