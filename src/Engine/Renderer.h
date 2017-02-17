@@ -14,10 +14,8 @@ const int POSITION_LAYOUT_LOC = 0;
 
 //Desired OpenGL parameters
 #define GL_DESIRED_MAJOR_VERSION 4
-#define GL_DESIRED_MINOR_VERSION 5
-#define GL_FALLBACK_MAJOR_VERSION 3
-#define GL_FALLBACK_MINOR_VERSION 3
-#define GLEW_DESIRED_VERSION GLEW_VERSION_4_5
+#define GL_DESIRED_MINOR_VERSION 3
+#define GLEW_DESIRED_VERSION GLEW_VERSION_4_3
 
 class Renderer {
  public:
@@ -27,7 +25,7 @@ class Renderer {
   void DeleteObject(GLuint *VBO);
   void Draw(GLuint vbo, GLuint numVerticies, Shader* shader);
   void BeginFrame();
-  void EndFrame(); 
+  void EndFrame();
   void SetMainCamera(CameraComponent* camera);
 
  private:
