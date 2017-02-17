@@ -1,0 +1,1 @@
+/usr/bin/cc  -O2 -g -DNDEBUG   CMakeFiles/visualinfo.dir/__/__/src/visualinfo.c.o  -o ../../../../bin/visualinfo -rdynamic ../../../../lib/libGLEW.so -lX11 -lXext -lGLU -lGL -Wl,-rpath,/home/joseph/Projects/TMBR/lib: 

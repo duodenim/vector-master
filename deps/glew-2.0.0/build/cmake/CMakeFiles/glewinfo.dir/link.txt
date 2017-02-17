@@ -1,0 +1,1 @@
+/usr/bin/cc  -O2 -g -DNDEBUG   CMakeFiles/glewinfo.dir/__/__/src/glewinfo.c.o  -o ../../../../bin/glewinfo -rdynamic ../../../../lib/libGLEW.so -lX11 -lXext -lGLU -lGL -Wl,-rpath,/home/joseph/Projects/TMBR/lib: 
