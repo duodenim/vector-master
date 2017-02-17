@@ -27,7 +27,6 @@ public:
 private:
     Renderer *renderer;
     Shader *shader;
-    GLuint vao;
     GLuint vbo;
     GLuint numVerticies;
 

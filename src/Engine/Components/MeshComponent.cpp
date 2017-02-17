@@ -10,7 +10,7 @@
 MeshComponent::MeshComponent(GLfloat *vertexData, GLuint size) {
     renderer = EngineCore::GetEngine()->GetRenderer();
     shader = new Shader("vertex.glsl", "fragment.glsl");
-    renderer->RegisterObject(vertexData, size, &vbo, &vao);
+    renderer->RegisterObject(vertexData, size, &vbo);
     numVerticies = size / 3;
     position = glm::vec3(0.0f, 0.0f, 0.0f);
     rotation = 0.0f;
@@ -21,12 +21,12 @@ MeshComponent::MeshComponent(GLfloat *vertexData, GLuint size) {
 }
 MeshComponent::~MeshComponent(){
     delete shader;
-    renderer->DeleteObject(&vbo, &vao);
+    renderer->DeleteObject(&vbo);
 }
 void MeshComponent::Draw() {
     shader->Use();
     UpdateTransforms();
-    renderer->Draw(vao, numVerticies, shader);
+    renderer->Draw(vbo, numVerticies, shader);
 }
 void MeshComponent::SetColor(glm::vec3 newColor) {
 	color = newColor;

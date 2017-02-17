@@ -22,9 +22,10 @@ const int POSITION_LAYOUT_LOC = 0;
 class Renderer {
  public:
   Renderer(int width, int height);
-  void RegisterObject(GLfloat *vertexData, GLuint size, GLuint *outVBO, GLuint *outVAO);
-  void DeleteObject(GLuint *VBO, GLuint *VAO);
-  void Draw(GLuint vao, GLuint numVerticies, Shader* shader);
+  ~Renderer();
+  void RegisterObject(GLfloat *vertexData, GLuint size, GLuint *outVBO);
+  void DeleteObject(GLuint *VBO);
+  void Draw(GLuint vbo, GLuint numVerticies, Shader* shader);
   void BeginFrame();
   void EndFrame(); 
   void SetMainCamera(CameraComponent* camera);
@@ -34,6 +35,7 @@ class Renderer {
 
   CameraComponent* mainCamera;
   GLuint cameraUBO;
+  GLuint VAO; //All verticies will be specified using the same layout, so global VAO is OK
 
 };
 
