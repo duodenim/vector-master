@@ -30,8 +30,6 @@ void World::CreateWorld() {
 
 
   player1->SetPosition(glm::vec3(-0.4f, -0.4f, 0.0f));
-  player1->AddCollisionWatcher(top->cBox);
-  player1->AddCollisionWatcher(bottom->cBox);
 
 
 }

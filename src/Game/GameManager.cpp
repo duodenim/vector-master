@@ -38,7 +38,6 @@ void GameManager::Update(float deltaTime) {
     }
     bulletRot += rot;
     spawnBullet--;
-    mainPlayer->AddBulletCollisionWatcher(bullet->cCircle);
   }
   camera->position.y = 0.05 * sin(totalTime);
   camera->position.x = 0.05 * cos(totalTime);

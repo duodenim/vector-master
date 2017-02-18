@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "GameObject.h"
+#include "Components/CollisionComponent.h"
 
 enum class EventTypes {
   EVENT_UPDATE
@@ -23,18 +24,23 @@ class ObjectManager {
   };
 
   void DestroyObject(GameObject* object);
+  void RemoveCollider(CollisionComponent* collider);
 
   GameObject* GetObjectByIndex(int index) { return objects [index]; }
 
   void DestroyAllObjects();
 
   void Update();
+
+  void RegisterCollider(CollisionComponent* collider);
  private:
   std::vector<GameObject*> objects;
   std::vector<GameObject*> destroyQueue;
-
+  std::vector<CollisionComponent*> colliders;
   void ClearDestroyQueue();
   void Remove(GameObject* object);
+  void RunCollision();
+
 
 };
 

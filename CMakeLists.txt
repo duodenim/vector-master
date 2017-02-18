@@ -36,6 +36,8 @@ set(SOURCE_FILES src/main.cpp
                  src/Engine/Components/AudioSourceComponent.h
                  src/Engine/Components/CameraComponent.cpp
                  src/Engine/Components/CameraComponent.h
+                 src/Engine/Components/CollisionComponent.cpp
+                 src/Engine/Components/CollisionComponent.h
                  src/Engine/Components/CollisionBox2DComponent.cpp
                  src/Engine/Components/CollisionBox2DComponent.h
                  src/Engine/Components/CollisionCircle2DComponent.cpp

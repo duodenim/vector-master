@@ -28,6 +28,7 @@ Bullet::Bullet() {
   lifeTimer = lifeSpan;
   cCircle = new CollisionCircle2DComponent();
   cCircle->SetRadius(0.05f);
+  cCircle->SetOwner(this);
 }
 
 Bullet::~Bullet() {

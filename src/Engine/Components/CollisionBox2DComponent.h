@@ -8,23 +8,19 @@
 #include <glm.hpp>
 #include <vector>
 #include "../Component.h"
+#include "CollisionComponent.h"
 
-class CollisionBox2DComponent : public Component{
+class CollisionBox2DComponent : public CollisionComponent {
  public:
   CollisionBox2DComponent();
   ~CollisionBox2DComponent();
 
   void SetSize(float newWidth, float newHeight);
 
-  void AddCollisionWatcher(CollisionBox2DComponent* newWatchObject);
-
-  bool CheckCollision(CollisionBox2DComponent* other);
-
-  bool CheckAllCollisions();
+  bool CheckCollision(CollisionComponent* other);
 
   glm::vec3 position;
  private:
-  std::vector<CollisionBox2DComponent*> watchObjects;
   float width, height;
 
 };

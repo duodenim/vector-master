@@ -1,29 +1,23 @@
 #ifndef COLLISION_CIRCLE_2D_H
 #define COLLISION_CIRCLE_2D_H
 
-#include "../Component.h"
+#include "CollisionComponent.h"
 #include <glm.hpp>
 #include <vector>
 
-class CollisionCircle2DComponent : public Component {
+class CollisionCircle2DComponent : public CollisionComponent {
 public:
   CollisionCircle2DComponent();
   ~CollisionCircle2DComponent();
 
   void SetRadius(float newRadius);
 
-  void AddCollisionWatcher(CollisionCircle2DComponent* newWatchObject);
-
-  bool CheckCollision(CollisionCircle2DComponent* other);
-
-  bool CheckAllCollisions();
+  bool CheckCollision(CollisionComponent* other);
 
   glm::vec3 position;
 
 private:
   float radius;
-
-  std::vector<CollisionCircle2DComponent*> watchObjects;
 
 };
 

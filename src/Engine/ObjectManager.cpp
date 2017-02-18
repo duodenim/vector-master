@@ -25,6 +25,7 @@ void ObjectManager::Update() {
   for (int i = 0; i < objects.size(); i++) {
     objects[i]->Update(deltaTime);
   }
+  RunCollision();
   ClearDestroyQueue();
 }
 
@@ -41,4 +42,27 @@ void ObjectManager::Remove(GameObject* object) {
   objects.erase(it);
   objects.shrink_to_fit();
   delete object;
+}
+
+void ObjectManager::RegisterCollider(CollisionComponent* collider) {
+  colliders.push_back(collider);
+}
+
+void ObjectManager::RunCollision() {
+  for(int i = 0; i < colliders.size() - 1; i++) {
+    for(int k = i + 1; k < colliders.size(); k++) {
+      if(colliders[i]->CheckCollision(colliders[k])) {
+        if(colliders[i]->owner != NULL && colliders[k]->owner != NULL) {
+          colliders[i]->owner->Collision(colliders[k]->owner);
+          colliders[k]->owner->Collision(colliders[i]->owner);
+        }
+      }
+    }
+  }
+}
+
+void ObjectManager::RemoveCollider(CollisionComponent *collider) {
+  auto it = std::find(colliders.begin(), colliders.end(), collider);
+  colliders.erase(it);
+  colliders.shrink_to_fit();
 }

@@ -17,9 +17,7 @@ class Player : public GameObject {
   Player();
   ~Player();
   void Update(float deltaTime);
-
-  void AddCollisionWatcher(CollisionBox2DComponent* box);
-  void AddBulletCollisionWatcher(CollisionCircle2DComponent* box);
+  void Collision(GameObject* other);
 
   void SetPosition(glm::vec3 newPosition);
 

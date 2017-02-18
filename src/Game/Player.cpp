@@ -32,15 +32,16 @@ Player::Player() {
   iComponent = new InputComponent();
   cBox = new CollisionBox2DComponent();
   cBox->SetSize(0.08f, 0.2f);
+  cBox->SetOwner(this);
   bulletHitBox = new CollisionCircle2DComponent();
   bulletHitBox->SetRadius(0.05f);
+  bulletHitBox->SetOwner(this);
   lastFireState = false;
   mesh->rotation = 0.0f;
   netX = 0.0f;
   netY = 0.0f;
   fireRate = 0.3f;
   nextFireTime = fireRate;
-
 }
 Player::~Player() {
   delete mesh;
@@ -65,8 +66,6 @@ void Player::Update(float deltaTime) {
     cBox->position.y += 0.001f * deltaTime * 1000;
   if (iComponent->GetKeyState(downKey))
     cBox->position.y -= 0.001f * deltaTime * 1000;
-  if(cBox->CheckAllCollisions())
-    cBox->position = lastPosition;
 
   //Check collision on X axis
   lastPosition = cBox->position;
@@ -74,8 +73,6 @@ void Player::Update(float deltaTime) {
     cBox->position.x += 0.001 * deltaTime * 1000;
   if (iComponent->GetKeyState(leftKey))
     cBox->position.x -= 0.001f * deltaTime * 1000;
-  if (cBox->CheckAllCollisions())
-    cBox->position = lastPosition;
 
   //Determine player rotation
   netY = (float)(iComponent->GetKeyState(GLFW_KEY_UP));
@@ -107,11 +104,8 @@ void Player::Update(float deltaTime) {
 
   mesh->Draw();
 }
-void Player::AddCollisionWatcher(CollisionBox2DComponent *box) {
-  cBox->AddCollisionWatcher(box);
-}
-void Player::AddBulletCollisionWatcher(CollisionCircle2DComponent * box) {
-  bulletHitBox->AddCollisionWatcher(box);
+void Player::Collision(GameObject* other) {
+  std::cout << "Collision Hit" << std::endl;
 }
 void Player::SetPosition(glm::vec3 newPosition) {
   mesh->position = newPosition;

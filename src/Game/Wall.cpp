@@ -18,7 +18,7 @@ Wall::Wall() {
   mesh = new MeshComponent(wallVerticies, 18);
   cBox = new CollisionBox2DComponent();
   cBox->SetSize(2.0f, 0.1f);
-
+  cBox->SetOwner(this);
 }
 Wall::~Wall() {
   delete mesh;
