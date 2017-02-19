@@ -10,9 +10,7 @@ public:
   virtual ~CollisionComponent();
   virtual bool CheckCollision(CollisionComponent* other);
   void SetOwner(GameObject* newOwner);
-  void Register();
   GameObject* owner;
-private:
 
 
 };

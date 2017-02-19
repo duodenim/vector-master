@@ -22,6 +22,9 @@ class CollisionBox2DComponent : public CollisionComponent {
   glm::vec3 position;
  private:
   float width, height;
+  const float SIZE_Z = 0.1f; //The other collision component's z position must be 
+                             //within this range to collide
+
 
 };
 

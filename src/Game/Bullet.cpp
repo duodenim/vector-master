@@ -38,6 +38,7 @@ Bullet::~Bullet() {
 
 void Bullet::Update(float deltaTime) {
   mesh->position += velocity * deltaTime;
+  cCircle->position = mesh->position;
   lifeTimer -= deltaTime;
   mesh->Draw();
   if (lifeTimer < 0.0f) {

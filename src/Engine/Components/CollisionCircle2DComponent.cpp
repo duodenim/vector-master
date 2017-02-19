@@ -15,8 +15,12 @@ void CollisionCircle2DComponent::SetRadius(float newRadius) {
 bool CollisionCircle2DComponent::CheckCollision(CollisionComponent * other){
 
   CollisionCircle2DComponent* otherCircle = dynamic_cast<CollisionCircle2DComponent*>(other);
-  if(otherCircle == NULL)
+  if (otherCircle == NULL) {
     return false;
+  }
+  if (abs(otherCircle->position.z - position.z) > SIZE_Z) {
+    return false;
+  }
   float dx = otherCircle->position.x - this->position.x;
   float dy = otherCircle->position.y - this->position.y;
 
