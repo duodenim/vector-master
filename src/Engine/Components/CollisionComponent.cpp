@@ -9,6 +9,7 @@ CollisionComponent::~CollisionComponent() {
   EngineCore::GetEngine()->GetObjectManager()->RemoveCollider(this);
 }
 bool CollisionComponent::CheckCollision(CollisionComponent* other) {
+  return false;
 
 }
 
