@@ -38,8 +38,8 @@ Player::Player() {
   bulletHitBox->SetOwner(this);
   lastFireState = false;
   mesh->rotation = 0.0f;
-  netX = 0.0f;
-  netY = 0.0f;
+  netX = 0;
+  netY = 0;
   fireRate = 0.3f;
   nextFireTime = fireRate;
 }
@@ -60,43 +60,41 @@ void Player::Update(float deltaTime) {
   int rightKey = GLFW_KEY_D;
   int leftKey = GLFW_KEY_A;
 
-  //Check collision on Y axis
-  glm::vec3 lastPosition = cBox->position;
-  if (iComponent->GetKeyState(upKey))
-    cBox->position.y += 0.001f * deltaTime * 1000;
-  if (iComponent->GetKeyState(downKey))
-    cBox->position.y -= 0.001f * deltaTime * 1000;
+  //Determine player position
+  netY = (int)(iComponent->GetKeyState(upKey));
+  netY -= (int)(iComponent->GetKeyState(downKey));
 
-  //Check collision on X axis
-  lastPosition = cBox->position;
-  if (iComponent->GetKeyState(rightKey))
-    cBox->position.x += 0.001 * deltaTime * 1000;
-  if (iComponent->GetKeyState(leftKey))
-    cBox->position.x -= 0.001f * deltaTime * 1000;
+  netX = (int)(iComponent->GetKeyState(rightKey));
+  netX -= (int)(iComponent->GetKeyState(leftKey));
 
-  //Determine player rotation
-  netY = (float)(iComponent->GetKeyState(GLFW_KEY_UP));
-  netY -= (float)(iComponent->GetKeyState(GLFW_KEY_DOWN));
+  if (netX != 0 || netY != 0) {
+    glm::vec3 newPosition = glm::vec3();
+    newPosition.x = (float)(netX) / 4.17f;
+    newPosition.y = (float)(netY) / 4.17f;
+    if (netX != 0 && netY != 0) {
+      //Force position onto the diagonal edge
+      newPosition.x = newPosition.x / 1.414f;
+      newPosition.y = newPosition.y / 1.414f;
+    }
 
-  netX = (float)(iComponent->GetKeyState(GLFW_KEY_RIGHT));
-  netX -= (float)(iComponent->GetKeyState(GLFW_KEY_LEFT));
-
-  if (netX != 0.0f || netY != 0.0f) {
-    if (netX >= 0.0f) {
+    SetPosition(newPosition);
+    if (netX > 0) {
+      mesh->rotation = glm::degrees(atan(netY / netX)) + 180.0f;
+    }
+    else if (netX < 0) {
       mesh->rotation = glm::degrees(atan(netY / netX));
     }
     else {
-      mesh->rotation = glm::degrees(atan(netY / netX)) + 180.0f;
+      mesh->rotation = -90.0f * netY;
     }
   }
-  if ((netX != 0.0f || netY != 0.0f) && nextFireTime < 0.0f)
-  {
-    nextFireTime = fireRate;
-    lastFireState = true;
-    //Spawn bullet
-    Bullet* bullet = world->SpawnObject<Bullet>();
+  if (iComponent->GetKeyState(GLFW_KEY_SPACE) && !lastFireState) {
+    Bullet *bullet = world->SpawnObject<Bullet>();
     bullet->SetPosition(cBox->position);
-    bullet->SetRotation(mesh->rotation);
+    lastFireState = true;
+  }
+  else if (!iComponent->GetKeyState(GLFW_KEY_SPACE)) {
+    lastFireState = false;
   }
 
   mesh->position = cBox->position;

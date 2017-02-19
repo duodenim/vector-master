@@ -31,8 +31,8 @@ class Player : public GameObject {
   bool lastFireState;
 
   //Directional inputs
-  float netX;
-  float netY;
+  int netX;
+  int netY;
 
   float fireRate;
   float nextFireTime;
