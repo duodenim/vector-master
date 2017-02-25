@@ -21,6 +21,7 @@ Enemy::Enemy() {
   cCircle->SetOwner(this);
   cCircle->SetRadius(0.12f);
   cCircle->position = mesh->position;
+  hitFrames = -1;
 }
 
 Enemy::~Enemy() {
@@ -32,14 +33,27 @@ void Enemy::Update(float deltaTime) {
   cCircle->position += velocity * deltaTime;
   mesh->position = cCircle->position;
   mesh->Draw();
+  if (mesh->position.z > 0.1f) {
+    exit(0);
+  }
+  if (hitFrames == 0) {
+    Destroy();
+  }
+  else if (hitFrames > 0) {
+    hitFrames--;
+  }
 }
 
 void Enemy::Collision(GameObject * other) {
   Bullet* bullet = dynamic_cast<Bullet*>(other);
   if (bullet != NULL) {
-    std::cout << "enemy hit";
     if (bullet->friendly) {
-      Destroy();
+      if (bullet->cCircle->position.z - cCircle->position.z > 0.0f) {
+        hitFrames = 2;
+      }
+      else {
+        hitFrames = 0;
+      }
     }
   }
 }
@@ -47,4 +61,8 @@ void Enemy::Collision(GameObject * other) {
 void Enemy::SetPosition(glm::vec3 pos) {
   mesh->position = pos;
   cCircle->position = pos;
+}
+
+void Enemy::SetSpeed(float speed) {
+  velocity = glm::vec3(0.0f, 0.0f, speed);
 }

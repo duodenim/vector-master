@@ -26,5 +26,6 @@ private:
   MeshComponent* mesh;
   float lifeSpan;
   float lifeTimer;
+  int hitFrames;
 };
 #endif

@@ -22,11 +22,13 @@ void ObjectManager::DestroyAllObjects() {
 
 void ObjectManager::Update() {
   float deltaTime = EngineCore::GetEngine()->deltaTime;
+  RunCollision();
+  ClearDestroyQueue();
   for (int i = 0; i < objects.size(); i++) {
     objects[i]->Update(deltaTime);
   }
-  RunCollision();
-  ClearDestroyQueue();
+  
+  
 }
 
 void ObjectManager::ClearDestroyQueue() {

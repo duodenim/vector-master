@@ -6,6 +6,7 @@
 #define PONGGL_WORLD_H
 
 #include "../Engine/ObjectManager.h"
+#include "GameManager.h"
 
 class World {
  public:
@@ -20,6 +21,7 @@ class World {
     return objectManager->SpawnObject<T>();
   };
 
+  GameManager* gameManager;
  private:
   ObjectManager *objectManager;
 

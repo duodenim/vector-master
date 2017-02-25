@@ -18,7 +18,7 @@ public:
 
 private:
   float radius;
-  const float SIZE_Z = 0.1f; //The other collision component's z position must be 
+  const float SIZE_Z = 0.05f; //The other collision component's z position must be 
                              //within this range to collide
 
 };

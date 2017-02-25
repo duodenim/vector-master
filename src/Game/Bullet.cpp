@@ -31,6 +31,7 @@ Bullet::Bullet() {
   cCircle = new CollisionCircle2DComponent();
   cCircle->SetRadius(0.05f);
   cCircle->SetOwner(this);
+  hitFrames = -1;
 }
 
 Bullet::~Bullet() {
@@ -46,18 +47,25 @@ void Bullet::Update(float deltaTime) {
   if (lifeTimer < 0.0f) {
     Destroy();
   }
+  if (hitFrames == 0) {
+    Destroy();
+  }
+  else if (hitFrames > 0) {
+    hitFrames--;
+  }
+  
 
 }
 
 void Bullet::Collision(GameObject * other) {
   Enemy* enemy = dynamic_cast<Enemy*>(other);
   if (enemy != NULL && friendly) {
-    Destroy();
+    hitFrames = 2;
     return;
   }
   Player* player = dynamic_cast<Player*>(other);
   if (player != NULL && !friendly) {
-    Destroy();
+    hitFrames = 2;
     return;
   }
 }

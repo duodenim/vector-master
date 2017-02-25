@@ -69,8 +69,8 @@ void Player::Update(float deltaTime) {
 
   if (netX != 0 || netY != 0) {
     glm::vec3 newPosition = glm::vec3();
-    newPosition.x = (float)(netX) / 4.17f;
-    newPosition.y = (float)(netY) / 4.17f;
+    newPosition.x = (float)(netX) / 2.08f;
+    newPosition.y = (float)(netY) / 2.08f;
     if (netX != 0 && netY != 0) {
       //Force position onto the diagonal edge
       newPosition.x = newPosition.x / 1.414f;
@@ -103,7 +103,6 @@ void Player::Update(float deltaTime) {
   mesh->Draw();
 }
 void Player::Collision(GameObject* other) {
-  std::cout << "Collision Hit" << std::endl;
 }
 void Player::SetPosition(glm::vec3 newPosition) {
   mesh->position = newPosition;

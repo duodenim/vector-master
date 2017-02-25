@@ -10,14 +10,14 @@
 #include <cstdlib>
 #include <ctime>
 glm::vec3 enemyPositions[8] = {
-  glm::vec3(-0.24f, 0.0f, -4.0f),
-  glm::vec3(0.24f, 0.0f, -4.0f),
-  glm::vec3(0.0f, 0.24f, -4.0f),
-  glm::vec3(0.0f, -0.24f, -4.0f),
-  glm::vec3(0.12f, 0.12f, -4.0f),
-  glm::vec3(-0.12f, 0.12f, -4.0f),
-  glm::vec3(-0.12f, -0.12f, -4.0f),
-  glm::vec3(0.12f, -0.12f, -4.0f)
+  glm::vec3(-0.48f, 0.0f, -4.0f),
+  glm::vec3(0.48f, 0.0f, -4.0f),
+  glm::vec3(0.0f, 0.48f, -4.0f),
+  glm::vec3(0.0f, -0.48f, -4.0f),
+  glm::vec3(0.24f, 0.24f, -4.0f),
+  glm::vec3(-0.24f, 0.24f, -4.0f),
+  glm::vec3(-0.24f, -0.24f, -4.0f),
+  glm::vec3(0.24f, -0.24f, -4.0f)
 };
 GameManager::GameManager() {
   player1Score = 0;
@@ -50,9 +50,17 @@ void GameManager::Update(float deltaTime) {
     spawnBullet--;
     
   }
-  if (rand() % 100 == 0) {
+  int spawnFactor = 50;
+  if (totalTime > 300) {
+    spawnFactor = 20;
+  }
+  else {
+    spawnFactor = 50 - (5.0f / 30.0f) * (totalTime);
+  }
+  if (rand() % spawnFactor == 0) {
     Enemy* enemy = world->SpawnObject<Enemy>();
     enemy->SetPosition(enemyPositions[rand() % 8]);
+    enemy->SetSpeed(1.0f + totalTime / 100.0f);
   }
   
   camera->position.y = 0.05 * sin(totalTime);

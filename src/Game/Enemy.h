@@ -12,9 +12,11 @@ public:
   void Update(float deltaTime);
   void Collision(GameObject* other);
   void SetPosition(glm::vec3 pos);
+  void SetSpeed(float speed);
 private:
   MeshComponent* mesh;
   CollisionCircle2DComponent* cCircle;
   glm::vec3 velocity;
+  int hitFrames;
 };
 #endif

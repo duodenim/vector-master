@@ -6,7 +6,6 @@
 #include "../Engine/EngineCore.h"
 #include "Player.h"
 #include "Wall.h"
-#include "GameManager.h"
 #include "Tube.h"
 World::World() {
   objectManager = EngineCore::GetEngine()->GetObjectManager();
@@ -21,7 +20,7 @@ void World::CreateWorld() {
   Player *player1 = SpawnObject<Player>();
   Wall *top = SpawnObject<Wall>();
   Wall *bottom = SpawnObject<Wall>();
-  GameManager *gameManager = SpawnObject<GameManager>();
+  gameManager = SpawnObject<GameManager>();
   SpawnObject<Tube>();
   gameManager->SetPlayer(player1);
 
@@ -29,7 +28,7 @@ void World::CreateWorld() {
   top->SetPosition(glm::vec3(0.0f, 0.9f, 0.0f));
 
 
-  player1->SetPosition(glm::vec3(-0.24f, 0.0f, 0.0f));
+  player1->SetPosition(glm::vec3(-0.48f, 0.0f, 0.0f));
 
 
 }
