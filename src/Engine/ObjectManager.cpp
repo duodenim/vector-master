@@ -39,9 +39,12 @@ void ObjectManager::ClearDestroyQueue() {
 }
 void ObjectManager::Remove(GameObject* object) {
   auto it = std::find(objects.begin(), objects.end(), object);
-  objects.erase(it);
-  objects.shrink_to_fit();
-  delete object;
+  if (it != objects.end()) {
+    objects.erase(it);
+    objects.shrink_to_fit();
+    delete object;
+  }
+
 }
 
 void ObjectManager::RegisterCollider(CollisionComponent* collider) {

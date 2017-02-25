@@ -1,4 +1,6 @@
 #include "Bullet.h"
+#include "Enemy.h"
+#include "Player.h"
 #include <gtx/rotate_vector.hpp>
 
 GLfloat bulletVerts[] = {
@@ -23,8 +25,8 @@ GLfloat bulletVerts[] = {
 Bullet::Bullet() {
   mesh = new MeshComponent(bulletVerts, 48);
   mesh->SetColor(0.9f, 0.9f, 0.2f);
-  velocity = glm::vec3(0.0f, 0.0f, -0.5f);
-  lifeSpan = 3.0f;
+  velocity = glm::vec3(0.0f, 0.0f, -1.0f);
+  lifeSpan = 5.0f;
   lifeTimer = lifeSpan;
   cCircle = new CollisionCircle2DComponent();
   cCircle->SetRadius(0.05f);
@@ -45,6 +47,19 @@ void Bullet::Update(float deltaTime) {
     Destroy();
   }
 
+}
+
+void Bullet::Collision(GameObject * other) {
+  Enemy* enemy = dynamic_cast<Enemy*>(other);
+  if (enemy != NULL && friendly) {
+    Destroy();
+    return;
+  }
+  Player* player = dynamic_cast<Player*>(other);
+  if (player != NULL && !friendly) {
+    Destroy();
+    return;
+  }
 }
 
 void Bullet::SetPosition(glm::vec3 pos) {

@@ -11,6 +11,7 @@ public:
   ~Bullet();
 
   void Update(float deltaTime);
+  void Collision(GameObject* other);
 
   void SetPosition(glm::vec3 pos);
 

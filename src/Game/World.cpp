@@ -29,7 +29,7 @@ void World::CreateWorld() {
   top->SetPosition(glm::vec3(0.0f, 0.9f, 0.0f));
 
 
-  player1->SetPosition(glm::vec3(0.0f, -0.10f, 0.0f));
+  player1->SetPosition(glm::vec3(-0.24f, 0.0f, 0.0f));
 
 
 }
