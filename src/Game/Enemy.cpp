@@ -1,5 +1,9 @@
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Particle.h"
+#include  "../Engine/EngineCore.h"
+#include <cstdlib>
+#include <cmath>
 
 GLfloat enemyVerts[] = {
   0.0f, 0.06f, 0.0f,
@@ -16,7 +20,7 @@ Enemy::Enemy() {
   mesh->SetColor(1.0f, 0.0f, 0.0f);
   mesh->position = glm::vec3(0.24f, 0.0f, -4.0f);
   velocity = glm::vec3(0.0f, 0.0f, 0.3f);
-  mesh->rotation = 0.0f;
+  mesh->rotation = (rand() % 1000) / 157.0f;
   cCircle = new CollisionCircle2DComponent();
   cCircle->SetOwner(this);
   cCircle->SetRadius(0.12f);
@@ -32,11 +36,18 @@ Enemy::~Enemy() {
 void Enemy::Update(float deltaTime) {
   cCircle->position += velocity * deltaTime;
   mesh->position = cCircle->position;
+  mesh->rotation += 5.0f;
   mesh->Draw();
   if (mesh->position.z > 0.1f) {
     exit(0);
   }
   if (hitFrames == 0) {
+    for (int i = 0; i < 50; i++) {
+      Particle* part = EngineCore::GetEngine()->GetWorld()->SpawnObject<Particle>();
+      part->SetPosition(mesh->position);
+      float angle = (rand() % 1000) / 150.0f;
+      part->SetVelocity(glm::vec3(cos(angle) / (rand() % 5), sin(angle) / (rand() % 5), 0.0f));
+    } 
     Destroy();
   }
   else if (hitFrames > 0) {

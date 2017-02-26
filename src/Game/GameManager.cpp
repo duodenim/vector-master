@@ -6,6 +6,7 @@
 #include "../Engine/EngineCore.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "ScoreDisplay.h"
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -40,16 +41,10 @@ void GameManager::Update(float deltaTime) {
   World* world = EngineCore::GetEngine()->GetWorld();
   totalTime += deltaTime;
   if(spawnBullet) {
-    if (iComponent->GetKeyState(GLFW_KEY_Q)) {
-      rot += 0.1f;
-    }
-    if (iComponent->GetKeyState(GLFW_KEY_E)) {
-      rot -= 0.1f;
-    }
-    bulletRot += rot;
+    world->SpawnObject<ScoreDisplay>();
     spawnBullet--;
-    
   }
+
   int spawnFactor = 50;
   if (totalTime > 300) {
     spawnFactor = 20;

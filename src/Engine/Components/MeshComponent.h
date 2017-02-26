@@ -23,6 +23,7 @@ public:
 
 	void SetColor(glm::vec3 newColor);
 	void SetColor(float red, float blue, float green);
+  glm::vec3 GetColor() { return color; };
 
 private:
     Renderer *renderer;

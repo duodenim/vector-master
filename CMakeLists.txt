@@ -55,7 +55,11 @@ set(SOURCE_FILES src/main.cpp
                  src/Game/Enemy.cpp
                  src/Game/Enemy.h
                  src/Game/Tube.cpp
-                 src/Game/Tube.h)
+                 src/Game/Tube.h
+                 src/Game/Particle.cpp
+                 src/Game/Particle.h
+                 src/Game/ScoreDisplay.cpp
+                 src/Game/ScoreDisplay.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/deps/openal/include)
 include_directories(${CMAKE_SOURCE_DIR}/deps/glew-2.0.0/include/GL)

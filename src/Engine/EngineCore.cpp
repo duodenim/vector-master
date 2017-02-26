@@ -52,7 +52,7 @@ void EngineCore::GLFW_Startup() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GL_DESIRED_MAJOR_VERSION);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GL_DESIRED_MINOR_VERSION);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  //glfwWindowHint(GLFW_SAMPLES, 8);
+  glfwWindowHint(GLFW_SAMPLES, 8);
   window = glfwCreateWindow(540, 960, "Game", NULL, NULL);
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
