@@ -38,8 +38,11 @@ void Enemy::Update(float deltaTime) {
   mesh->position = cCircle->position;
   mesh->rotation += 5.0f;
   mesh->Draw();
-  if (mesh->position.z > 0.1f) {
-    exit(0);
+  if (mesh->position.z > 0.2f) {
+    EngineCore::GetEngine()->GetWorld()->gameManager->EndGame();
+  }
+  if (mesh->position.z > 1.0f) {
+    Destroy();
   }
   if (hitFrames == 0) {
     for (int i = 0; i < 50; i++) {

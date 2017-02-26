@@ -16,7 +16,7 @@
 #include "../Game/World.h"
 #include <GLFW/glfw3.h>
 
-enum class GameState {
+enum class EngineState {
   GAME_STARTUP,
   GAME_RUNNING,
   GAME_SHUTDOWN
@@ -46,7 +46,7 @@ class EngineCore {
   InputManager *inputManager;
   AudioSystem *audioSystem;
   World *world;
-  GameState state;
+  EngineState state;
   GLFWwindow *window;
   void GLFW_Startup();
   void GLFW_Shutdown();

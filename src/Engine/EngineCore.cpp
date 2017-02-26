@@ -5,7 +5,7 @@
 #include "EngineCore.h"
 
 void EngineCore::Init() {
-  state = GameState::GAME_STARTUP;
+  state = EngineState::GAME_STARTUP;
   GLFW_Startup();
   renderer = new Renderer(540, 960);
   inputManager = new InputManager(window);
@@ -14,11 +14,11 @@ void EngineCore::Init() {
   world = new World;
 }
 void EngineCore::BeginGame() {
-  state = GameState ::GAME_RUNNING;
+  state = EngineState ::GAME_RUNNING;
   world->CreateWorld();
 }
 void EngineCore::GameLoop() {
-  while (state == GameState::GAME_RUNNING) {
+  while (state == EngineState::GAME_RUNNING) {
     //Run events
     deltaTime = glfwGetTime();
     glfwSetTime(0.0f);
@@ -34,7 +34,7 @@ void EngineCore::GameLoop() {
   }
 }
 void EngineCore::Quit() {
-  state = GameState::GAME_SHUTDOWN;
+  state = EngineState::GAME_SHUTDOWN;
   world->DestroyWorld();
 }
 void EngineCore::Shutdown() {

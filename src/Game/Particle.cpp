@@ -26,7 +26,7 @@ void Particle::Update(float deltaTime) {
     Destroy();
   }
   glm::vec3 color = mesh->GetColor();
-  color = glm::vec3(color.x - 0.01f, color.y, color.z);
+  color = glm::vec3(color.x - 0.01f, color.y - 0.01f, color.z - 0.01f);
   mesh->SetColor(color);
   mesh->Draw();
 }
@@ -37,4 +37,12 @@ void Particle::SetPosition(glm::vec3 pos) {
 
 void Particle::SetVelocity(glm::vec3 vel) {
   velocity = vel;
+}
+
+void Particle::SetColor(glm::vec3 col) {
+  mesh->SetColor(col);
+}
+
+void Particle::SetLifeSpan(float newLifeSpan) {
+  lifeRemaining = newLifeSpan;
 }

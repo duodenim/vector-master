@@ -9,7 +9,14 @@
 #include "../Engine/Components/AudioSourceComponent.h"
 #include "../Engine/Components/InputComponent.h"
 #include "../Engine/Components/AudioSourceComponent.h"
+#include "ScoreDisplay.h"
 #include "Player.h"
+
+enum class GameState {
+  GAME_INTRO,
+  GAME_PLAY,
+  GAME_END
+};
 
 class GameManager : public GameObject{
  public:
@@ -17,6 +24,7 @@ class GameManager : public GameObject{
   ~GameManager();
   void Update(float deltaTime);
   void SetPlayer(Player* player);
+  void EndGame();
  private:
   int player1Score;
   int player2Score;
@@ -27,9 +35,11 @@ class GameManager : public GameObject{
   float bulletRot;
   float rot;
   float totalTime;
-  int spawnBullet;
+  bool firstFrame;
 
   Player* mainPlayer;
+  ScoreDisplay* sDisplay;
+  GameState state;
 
 
 

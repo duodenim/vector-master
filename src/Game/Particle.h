@@ -11,6 +11,8 @@ public:
   glm::vec3 velocity;
   void SetPosition(glm::vec3 pos);
   void SetVelocity(glm::vec3 vel);
+  void SetColor(glm::vec3 col);
+  void SetLifeSpan(float newLifeSpan);
 private:
   MeshComponent* mesh;
   float lifeSpan;

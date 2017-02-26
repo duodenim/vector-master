@@ -9,9 +9,12 @@ public:
   ScoreDisplay();
   ~ScoreDisplay();
   void Update(float deltaTime);
+  bool countScore;
+  void ResetScore();
 private:
   std::vector<MeshComponent*> text;
   int score;
   float scoreTimer;
+  
 };
 #endif

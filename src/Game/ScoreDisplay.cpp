@@ -102,6 +102,7 @@ ScoreDisplay::ScoreDisplay() {
   text.push_back(tmp);
   score = 0;
   scoreTimer = 0.0f;
+  countScore = true;
 }
 
 ScoreDisplay::~ScoreDisplay() {
@@ -115,9 +116,10 @@ ScoreDisplay::~ScoreDisplay() {
 
 void ScoreDisplay::Update(float deltaTime) {
   scoreTimer += deltaTime;
-  if (scoreTimer > 1.0f) {
+  
+  if (scoreTimer > 1.0f && countScore) {
     score++;
-    scoreTimer -= 1.0f;
+    scoreTimer = 0.0f;
   }
   int tmp = score;
   for (int i = 0; i < 4; i++) {
@@ -179,4 +181,8 @@ void ScoreDisplay::Update(float deltaTime) {
   for (int i = 0; i < text.size(); i++) {
     text[i]->Draw();
   }
+}
+
+void ScoreDisplay::ResetScore() {
+  score = 0;
 }

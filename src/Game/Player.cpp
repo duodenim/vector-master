@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "../Engine/EngineCore.h"
 #include "Bullet.h"
+#include "Particle.h"
 #include <cmath>
 
 GLfloat playerVerticies[] = {
@@ -44,10 +45,20 @@ Player::Player() {
   nextFireTime = fireRate;
 }
 Player::~Player() {
+  //Spawn explosion
+  for (int i = 0; i < 100; i++) {
+    Particle* part = EngineCore::GetEngine()->GetWorld()->SpawnObject<Particle>();
+    part->SetPosition(mesh->position);
+    part->SetColor(glm::vec3(0.2f, 0.9f, 0.2f));
+    part->SetLifeSpan(2.0f);
+    float angle = (rand() % 1000) / 150.0f;
+    part->SetVelocity(glm::vec3(cos(angle) / (rand() % 5), sin(angle) / (rand() % 5), 0.0f));
+  }
   delete mesh;
   delete iComponent;
   delete cBox;
   delete bulletHitBox;
+  
 }
 void Player::Update(float deltaTime) {
 
