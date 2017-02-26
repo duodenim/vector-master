@@ -25,13 +25,16 @@ GLfloat bulletVerts[] = {
 Bullet::Bullet() {
   mesh = new MeshComponent(bulletVerts, 48);
   mesh->SetColor(0.9f, 0.9f, 0.2f);
+  mesh->position = glm::vec3(0.0f, 0.0f, 0.0f);
   velocity = glm::vec3(0.0f, 0.0f, -1.0f);
   lifeSpan = 5.0f;
   lifeTimer = lifeSpan;
   cCircle = new CollisionCircle2DComponent();
   cCircle->SetRadius(0.05f);
   cCircle->SetOwner(this);
+  cCircle->position = glm::vec3(0.0f, 0.0f, 0.0f);
   hitFrames = -1;
+  friendly = true;
 }
 
 Bullet::~Bullet() {
