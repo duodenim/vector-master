@@ -45,12 +45,8 @@ void Enemy::Update(float deltaTime) {
     Destroy();
   }
   if (hitFrames == 0) {
-    for (int i = 0; i < 50; i++) {
-      Particle* part = EngineCore::GetEngine()->GetWorld()->SpawnObject<Particle>();
-      part->SetPosition(mesh->position);
-      float angle = (rand() % 1000) / 150.0f;
-      part->SetVelocity(glm::vec3(cos(angle) / (rand() % 5), sin(angle) / (rand() % 5), 0.0f));
-    } 
+    Particle* part = EngineCore::GetEngine()->GetWorld()->SpawnObject<Particle>();
+    part->SetPosition(mesh->position);
     Destroy();
   }
   else if (hitFrames > 0) {

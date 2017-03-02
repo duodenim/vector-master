@@ -15,6 +15,9 @@ public:
   void SetLifeSpan(float newLifeSpan);
 private:
   MeshComponent* mesh;
+  int size;
+  glm::vec3* positions;
+  glm::vec3* velocities;
   float lifeSpan;
   float lifeRemaining;
 };
