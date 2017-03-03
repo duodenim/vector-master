@@ -12,7 +12,7 @@ public:
   bool countScore;
   void ResetScore();
 private:
-  std::vector<MeshComponent*> text;
+  std::vector<MeshComponent*> font;
   int score;
   float scoreTimer;
   

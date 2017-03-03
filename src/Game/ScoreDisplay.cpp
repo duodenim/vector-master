@@ -84,22 +84,37 @@ GLfloat nineVerts[] = {
 };
 
 ScoreDisplay::ScoreDisplay() {
+  //Load the font table
   MeshComponent* tmp = new MeshComponent(zeroVerts, 12);
-  tmp->position = glm::vec3(0.2f, -0.7f, 0.0f);
   tmp->SetColor(0.2f, 0.8f, 0.1f);
-  text.push_back(tmp);
-  tmp = new MeshComponent(zeroVerts, 12);
-  tmp->position = glm::vec3(0.1f, -0.7f, 0.0f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(oneVerts, 6);
   tmp->SetColor(0.2f, 0.8f, 0.1f);
-  text.push_back(tmp);
-  tmp = new MeshComponent(zeroVerts, 12);
-  tmp->position = glm::vec3(0.0f, -0.7f, 0.0f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(twoVerts, 30);
   tmp->SetColor(0.2f, 0.8f, 0.1f);
-  text.push_back(tmp);
-  tmp = new MeshComponent(zeroVerts, 12);
-  tmp->position = glm::vec3(-0.1f, -0.7f, 0.0f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(threeVerts, 27);
   tmp->SetColor(0.2f, 0.8f, 0.1f);
-  text.push_back(tmp);
+  font.push_back(tmp);
+  tmp = new MeshComponent(fourVerts, 12);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(fiveVerts, 30);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(sixVerts, 21);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(sevenVerts, 12);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(eightVerts, 24);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
+  tmp = new MeshComponent(nineVerts, 15);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  font.push_back(tmp);
   score = 0;
   scoreTimer = 0.0f;
   countScore = true;
@@ -107,9 +122,9 @@ ScoreDisplay::ScoreDisplay() {
 
 ScoreDisplay::~ScoreDisplay() {
   MeshComponent* tmp;
-  while (!text.empty()) {
-    tmp = text.back();
-    text.pop_back();
+  while (!font.empty()) {
+    tmp = font.back();
+    font.pop_back();
     delete tmp;
   }
 }
@@ -121,66 +136,19 @@ void ScoreDisplay::Update(float deltaTime) {
     score++;
     scoreTimer = 0.0f;
   }
+
   int tmp = score;
+
+  //Use temporary character as current character to draw from font
+  MeshComponent* digit = font[0];
   for (int i = 0; i < 4; i++) {
-    delete text[i];
-    switch (tmp % 10) {
-    case 0:
-      text[i] = new MeshComponent(zeroVerts, 12);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 1:
-      text[i] = new MeshComponent(oneVerts, 6);
-      text[i]->position = glm::vec3(0.2f - (0.1)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 2:
-      text[i] = new MeshComponent(twoVerts, 30);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 3:
-      text[i] = new MeshComponent(threeVerts, 27);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 4:
-      text[i] = new MeshComponent(fourVerts, 12);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 5:
-      text[i] = new MeshComponent(fiveVerts, 30);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 6:
-      text[i] = new MeshComponent(sixVerts, 21);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 7:
-      text[i] = new MeshComponent(sevenVerts, 12);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 8:
-      text[i] = new MeshComponent(eightVerts, 24);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    case 9:
-      text[i] = new MeshComponent(nineVerts, 15);
-      text[i]->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);
-      text[i]->SetColor(0.2f, 0.8f, 0.1f);
-      break;
-    }
+    digit = font[tmp % 10];
+    digit->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);   
     tmp /= 10;
+    digit->Draw();
   }
-  for (int i = 0; i < text.size(); i++) {
-    text[i]->Draw();
-  }
+    
+  
 }
 
 void ScoreDisplay::ResetScore() {
