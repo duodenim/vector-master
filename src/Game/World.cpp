@@ -18,14 +18,9 @@ void World::CreateWorld() {
 
   //Spawn all GameObjects
   Player *player1 = SpawnObject<Player>();
-  Wall *top = SpawnObject<Wall>();
-  Wall *bottom = SpawnObject<Wall>();
   gameManager = SpawnObject<GameManager>();
   SpawnObject<Tube>();
   gameManager->SetPlayer(player1);
-
-  bottom->SetPosition(glm::vec3(0.0f, -0.9f, 0.0f));
-  top->SetPosition(glm::vec3(0.0f, 0.9f, 0.0f));
 
 
   player1->SetPosition(glm::vec3(-0.48f, 0.0f, 0.0f));

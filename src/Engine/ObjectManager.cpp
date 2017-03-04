@@ -22,8 +22,8 @@ void ObjectManager::DestroyAllObjects() {
 
 void ObjectManager::Update() {
   float deltaTime = EngineCore::GetEngine()->deltaTime;
-  RunCollision();
   ClearDestroyQueue();
+  RunCollision();
   for (int i = 0; i < objects.size(); i++) {
     objects[i]->Update(deltaTime);
   }
@@ -54,6 +54,9 @@ void ObjectManager::RegisterCollider(CollisionComponent* collider) {
 }
 
 void ObjectManager::RunCollision() {
+  if (colliders.size() < 2) {
+    return;
+  }
   for(int i = 0; i < colliders.size() - 1; i++) {
     for(int k = i + 1; k < colliders.size(); k++) {
       if(colliders[i]->CheckCollision(colliders[k])) {

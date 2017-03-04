@@ -82,7 +82,37 @@ GLfloat nineVerts[] = {
   -0.03f, 0.0f, 0.0f,
   0.03f, 0.0f, 0.0f,
 };
-
+GLfloat hVerts[] = {
+  -0.03f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f,
+  -0.03f, 0.0f, 0.0f,
+  0.03f, 0.0f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.03f ,-0.03f, 0.0f,
+  0.03f, 0.0f, 0.0f,
+  -0.03f, 0.0f, 0.0f
+};
+GLfloat dashVerts[] = {
+  -0.03f, 0.0f, 0.0f,
+  0.03f, 0.0f, 0.0f
+};
+GLfloat cVerts[] = {
+  0.03f, 0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f,
+  -0.03f, -0.03f, 0.0f,
+  0.03f, -0.03f, 0.0f,
+  -0.03f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f
+};
+GLfloat rVerts[] = {
+  -0.03f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.03f, 0.0f, 0.0f,
+  -0.03f, 0.0f, 0.0f,
+  0.03f, -0.03f, 0.0f,
+  -0.03f, 0.0f, 0.0f
+};
 ScoreDisplay::ScoreDisplay() {
   //Load the font table
   MeshComponent* tmp = new MeshComponent(zeroVerts, 12);
@@ -114,8 +144,46 @@ ScoreDisplay::ScoreDisplay() {
   font.push_back(tmp);
   tmp = new MeshComponent(nineVerts, 15);
   tmp->SetColor(0.2f, 0.8f, 0.1f);
+
   font.push_back(tmp);
+
+  //Setup hi-score display
+  tmp = new MeshComponent(hVerts, 24);
+  tmp->position = glm::vec3(-0.35f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(hVerts, 24);
+  tmp->position = glm::vec3(-0.25f, 0.7f, 0.0f);
+  tmp->rotation = 90.0f;
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(dashVerts, 6);
+  tmp->position = glm::vec3(-0.15f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(fiveVerts, 30);
+  tmp->position = glm::vec3(-0.05f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(cVerts, 18);
+  tmp->position = glm::vec3(0.05f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(zeroVerts, 12);
+  tmp->position = glm::vec3(0.15f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(rVerts, 21);
+  tmp->position = glm::vec3(0.25f, 0.7f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(threeVerts, 27);
+  tmp->position = glm::vec3(0.35f, 0.7f, 0.0f);
+  tmp->rotation = 180.0f;
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
   score = 0;
+  highScore = 0;
   scoreTimer = 0.0f;
   countScore = true;
 }
@@ -127,6 +195,11 @@ ScoreDisplay::~ScoreDisplay() {
     font.pop_back();
     delete tmp;
   }
+  while (!hiScoreDisplay.empty()) {
+    tmp = hiScoreDisplay.back();
+    hiScoreDisplay.pop_back();
+    delete tmp;
+  }
 }
 
 void ScoreDisplay::Update(float deltaTime) {
@@ -135,6 +208,9 @@ void ScoreDisplay::Update(float deltaTime) {
   if (scoreTimer > 1.0f && countScore) {
     score++;
     scoreTimer = 0.0f;
+    if (score > highScore) {
+      highScore = score;
+    }
   }
 
   int tmp = score;
@@ -144,6 +220,16 @@ void ScoreDisplay::Update(float deltaTime) {
   for (int i = 0; i < 4; i++) {
     digit = font[tmp % 10];
     digit->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);   
+    tmp /= 10;
+    digit->Draw();
+  }
+  for (int i = 0; i < hiScoreDisplay.size(); i++) {
+    hiScoreDisplay[i]->Draw();
+  }
+  tmp = highScore;
+  for (int i = 0; i < 4; i++) {
+    digit = font[tmp % 10];
+    digit->position = glm::vec3(0.15f - (0.1f)*i, 0.6f, 0.0f);
     tmp /= 10;
     digit->Draw();
   }

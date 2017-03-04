@@ -13,7 +13,9 @@ public:
   void ResetScore();
 private:
   std::vector<MeshComponent*> font;
+  std::vector<MeshComponent*> hiScoreDisplay;
   int score;
+  int highScore;
   float scoreTimer;
   
 };
