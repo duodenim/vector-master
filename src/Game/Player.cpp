@@ -67,13 +67,26 @@ void Player::Update(float deltaTime) {
   int downKey = GLFW_KEY_S;
   int rightKey = GLFW_KEY_D;
   int leftKey = GLFW_KEY_A;
+  bool fire = false;
 
-  //Determine player position
-  netY = (int)(iComponent->GetKeyState(upKey));
-  netY -= (int)(iComponent->GetKeyState(downKey));
+  //Determine player input
+  if (glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE) {
+    int axisCount;
+    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axisCount);
+    netX = round(axes[0]);
+    netY = round(axes[1]);
+    int buttonCount;
+    const unsigned char* buttons = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &buttonCount);
+    fire = buttons[0];
+  }
+  else {
+    netY = (int)(iComponent->GetKeyState(upKey));
+    netY -= (int)(iComponent->GetKeyState(downKey));
 
-  netX = (int)(iComponent->GetKeyState(rightKey));
-  netX -= (int)(iComponent->GetKeyState(leftKey));
+    netX = (int)(iComponent->GetKeyState(rightKey));
+    netX -= (int)(iComponent->GetKeyState(leftKey));
+    fire = iComponent->GetKeyState(GLFW_KEY_SPACE);
+  }
 
   if (netX != 0 || netY != 0) {
     glm::vec3 newPosition = glm::vec3();
@@ -96,12 +109,12 @@ void Player::Update(float deltaTime) {
       mesh->rotation = -90.0f * netY;
     }
   }
-  if (iComponent->GetKeyState(GLFW_KEY_SPACE) && !lastFireState) {
+  if (fire && !lastFireState) {
     Bullet *bullet = world->SpawnObject<Bullet>();
     bullet->SetPosition(cBox->position);
     lastFireState = true;
   }
-  else if (!iComponent->GetKeyState(GLFW_KEY_SPACE)) {
+  else if (!fire) {
     lastFireState = false;
   }
 

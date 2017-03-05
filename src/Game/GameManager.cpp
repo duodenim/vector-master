@@ -63,7 +63,16 @@ void GameManager::Update(float deltaTime) {
     camera->RecalulatePosition();
   }
   else {
-    if (iComponent->GetKeyState(GLFW_KEY_Y)) {
+    bool reset = false;
+    if (glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE) {
+      int buttonCount;
+      const unsigned char *buttons = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &buttonCount);
+      reset = buttons[3];
+    }
+    else {
+      reset = iComponent->GetKeyState(GLFW_KEY_Y);
+    }
+    if (reset) {
       Reset();
     }
   }
