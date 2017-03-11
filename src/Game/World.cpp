@@ -17,13 +17,8 @@ void World::CreateWorld() {
   //Game init code goes here
 
   //Spawn all GameObjects
-  Player *player1 = SpawnObject<Player>();
   gameManager = SpawnObject<GameManager>();
   SpawnObject<Tube>();
-  gameManager->SetPlayer(player1);
-
-
-  player1->SetPosition(glm::vec3(-0.48f, 0.0f, 0.0f));
 
 
 }

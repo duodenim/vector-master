@@ -10,6 +10,7 @@
 #include "../Engine/Components/InputComponent.h"
 #include "../Engine/Components/AudioSourceComponent.h"
 #include "ScoreDisplay.h"
+#include "Menu.h"
 #include "Player.h"
 
 enum class GameState {
@@ -35,10 +36,10 @@ class GameManager : public GameObject{
   float bulletRot;
   float rot;
   float totalTime;
-  bool firstFrame;
 
   Player* mainPlayer;
   ScoreDisplay* sDisplay;
+  Menu* mainMenu;
   GameState state;
 
 

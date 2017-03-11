@@ -37,7 +37,7 @@ Player::Player() {
   bulletHitBox = new CollisionCircle2DComponent();
   bulletHitBox->SetRadius(0.05f);
   bulletHitBox->SetOwner(this);
-  lastFireState = false;
+  lastFireState = true;
   mesh->rotation = 0.0f;
   netX = 0;
   netY = 0;
