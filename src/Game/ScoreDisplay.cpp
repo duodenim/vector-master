@@ -69,6 +69,27 @@ ScoreDisplay::ScoreDisplay() {
   tmp->rotation = 180.0f;
   tmp->SetColor(0.2f, 0.8f, 0.1f);
   hiScoreDisplay.push_back(tmp);
+
+  tmp = new MeshComponent(sVerts, sSize);
+  tmp->position = glm::vec3(-0.20f, -0.6f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(cVerts, cSize);
+  tmp->position = glm::vec3(-0.10f, -0.6f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(zeroVerts, zeroSize);
+  tmp->position = glm::vec3(0.0f, -0.6f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(rVerts, rSize);
+  tmp->position = glm::vec3(0.10f, -0.6f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
+  tmp = new MeshComponent(eVerts, eSize);
+  tmp->position = glm::vec3(0.20f, -0.6f, 0.0f);
+  tmp->SetColor(0.2f, 0.8f, 0.1f);
+  hiScoreDisplay.push_back(tmp);
   score = 0;
   highScore = 0;
   scoreTimer = 0.0f;
@@ -106,7 +127,7 @@ void ScoreDisplay::Update(float deltaTime) {
   MeshComponent* digit = font[0];
   for (int i = 0; i < 4; i++) {
     digit = font[tmp % 10];
-    digit->position = glm::vec3(0.2f - (0.1f)*i, -0.7f, 0.0f);   
+    digit->position = glm::vec3(0.15f - (0.1f)*i, -0.7f, 0.0f);   
     tmp /= 10;
     digit->Draw();
   }

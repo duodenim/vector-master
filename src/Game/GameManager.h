@@ -14,7 +14,7 @@
 #include "Player.h"
 
 enum class GameState {
-  GAME_INTRO,
+  GAME_MENU,
   GAME_PLAY,
   GAME_END
 };

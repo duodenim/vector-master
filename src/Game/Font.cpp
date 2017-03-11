@@ -5,6 +5,7 @@ GLfloat zeroVerts[] = {
   0.03f, -0.03f, 0.0f,
   0.03f, 0.03f, 0.0f
 };
+int zeroSize = 12;
 GLfloat oneVerts[] = {
   0.03f, -0.03f, 0.0f,
   0.03f, 0.03f, 0.0f,
@@ -82,16 +83,7 @@ GLfloat nineVerts[] = {
   -0.03f, 0.0f, 0.0f,
   0.03f, 0.0f, 0.0f,
 };
-GLfloat hVerts[] = {
-  -0.03f, -0.03f, 0.0f,
-  -0.03f, 0.03f, 0.0f,
-  -0.03f, 0.0f, 0.0f,
-  0.03f, 0.0f, 0.0f,
-  0.03f, 0.03f, 0.0f,
-  0.03f ,-0.03f, 0.0f,
-  0.03f, 0.0f, 0.0f,
-  -0.03f, 0.0f, 0.0f
-};
+
 GLfloat dashVerts[] = {
   -0.03f, 0.0f, 0.0f,
   0.03f, 0.0f, 0.0f
@@ -125,6 +117,7 @@ GLfloat cVerts[] = {
   -0.03f, -0.03f, 0.0f,
   -0.03f, 0.03f, 0.0f
 };
+int cSize = 18;
 GLfloat dVerts[] = {
   -0.03f, -0.03f, 0.0f,
   -0.03f, 0.03f, 0.0f,
@@ -156,6 +149,30 @@ GLfloat fVerts[] = {
 -0.03f, 0.03f, 0.0f,
 };
 int fSize = 21;
+GLfloat gVerts[] = {
+0.025f, 0.03f, 0.0f,
+-0.03f, 0.03f, 0.0f,
+-0.03f, -0.03f, 0.0f,
+0.03f, -0.03f, 0.0f,
+0.03f, 0.0f, 0.0f,
+-0.013f, 0.0f, 0.0f,
+0.03f, 0.0f, 0.0f,
+0.03f, -0.03f, 0.0f,
+-0.03f, -0.03f, 0.0f,
+-0.03f, 0.03f, 0.0f
+};
+int gSize = 30;
+GLfloat hVerts[] = {
+  -0.03f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f,
+  -0.03f, 0.0f, 0.0f,
+  0.03f, 0.0f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.03f ,-0.03f, 0.0f,
+  0.03f, 0.0f, 0.0f,
+  -0.03f, 0.0f, 0.0f
+};
+int hSize = 24;
 GLfloat iVerts[] = {
   0.03f, 0.03f, 0.0f,
   -0.03f, 0.03f, 0.0f,
@@ -174,6 +191,17 @@ GLfloat lVerts[] = {
   -0.03f, -0.03f, 0.0f
 };
 int lSize = 12;
+GLfloat mVerts[] = {
+  -0.03f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f,
+  0.00f, -0.03f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.03f, -0.03f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.0f, -0.03f, 0.0f,
+  -0.03f, 0.03f, 0.0f
+};
+int mSize = 24;
 GLfloat pVerts[] = {
   -0.03f, -0.03f, 0.0f,
   -0.03f, 0.03f, 0.0f,
@@ -233,6 +261,13 @@ GLfloat uVerts[] = {
 -0.03f, -0.03f, 0.0f
 };
 int uSize = 18;
+GLfloat vVerts[] = {
+  -0.03f, 0.03f, 0.0f,
+  0.0f, -0.03f, 0.0f,
+  0.03f, 0.03f, 0.0f,
+  0.0f, -0.03f, 0.0f
+};
+int vSize = 12;
 GLfloat xVerts[] = {
 -0.02f, 0.03f, 0.0f,
 -0.02f, 0.02f, 0.0f,

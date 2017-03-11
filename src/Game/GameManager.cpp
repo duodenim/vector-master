@@ -29,7 +29,7 @@ GameManager::GameManager() {
   rot = 0.0f;
   totalTime = 0.0f;
   srand(time(NULL));
-  state = GameState::GAME_INTRO;
+  state = GameState::GAME_MENU;
 
   World* world = EngineCore::GetEngine()->GetWorld();
   sDisplay = world->SpawnObject<ScoreDisplay>();
@@ -47,6 +47,7 @@ void GameManager::Update(float deltaTime) {
   World* world = EngineCore::GetEngine()->GetWorld();
   totalTime += deltaTime;
   if (state == GameState::GAME_PLAY) {
+    //Gameplay tasks
     int spawnFactor = 50;
     if (totalTime > 300) {
       spawnFactor = 20;
@@ -64,7 +65,8 @@ void GameManager::Update(float deltaTime) {
     camera->position.x = 0.05 * cos(totalTime);
     camera->RecalulatePosition();
   }
-  else if (state == GameState::GAME_END){
+  else if (state == GameState::GAME_MENU){
+    //Show game menu
     bool reset = false;
     if (glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE) {
       int buttonCount;
@@ -79,9 +81,11 @@ void GameManager::Update(float deltaTime) {
     }
   }
   else {
-    //Show game menu
-    if (mainMenu->play) {
-      Reset();
+    //Show game over
+    if (totalTime > 4.0f) {
+      state = GameState::GAME_MENU;
+      mainMenu->active = true;
+      mainMenu->gameOverActive = false;
     }
   }
 }
@@ -91,10 +95,13 @@ void GameManager::SetPlayer(Player * player) {
 }
 
 void GameManager::EndGame(){
-  sDisplay->countScore = false;
-  state = GameState::GAME_END;
-  mainMenu->active = true;
-  mainPlayer->Destroy();
+  if (state != GameState::GAME_END) {
+    sDisplay->countScore = false;
+    state = GameState::GAME_END;
+    totalTime = 0.0f;
+    mainMenu->gameOverActive = true;
+    mainPlayer->Destroy();
+  }
 
 }
 

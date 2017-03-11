@@ -78,7 +78,43 @@ Menu::Menu() {
   tmp->SetColor(0.8f, 0.8f, 0.8f);
   text.push_back(tmp);
 
+  //Game Over Text
+  tmp = new MeshComponent(gVerts, gSize);
+  tmp->position = glm::vec3(-0.15f, 0.2f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(aVerts, aSize);
+  tmp->position = glm::vec3(-0.05f, 0.2f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(mVerts, mSize);
+  tmp->position = glm::vec3(0.05f, 0.2f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(eVerts, eSize);
+  tmp->position = glm::vec3(0.15f, 0.2f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(zeroVerts, zeroSize);
+  tmp->position = glm::vec3(-0.15f, 0.0f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(vVerts, vSize);
+  tmp->position = glm::vec3(-0.05f, 0.0f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(eVerts, eSize);
+  tmp->position = glm::vec3(0.05f, 0.0f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+  tmp = new MeshComponent(rVerts, rSize);
+  tmp->position = glm::vec3(0.15f, 0.0f, 0.0f);
+  tmp->SetColor(0.8f, 0.1f, 0.1f);
+  gameOverText.push_back(tmp);
+
   active = true;
+  gameOverActive = false;
+  gameOverFade = 0.0f;
   play = false;
   selectorLocations[0] = glm::vec3(0.0f, 0.0f, 0.0f);
   selectorLocations[1] = glm::vec3(0.0f, 0.2f, 0.0f);
@@ -102,11 +138,18 @@ Menu::~Menu() {
     delete tmp;
     text.pop_back();
   }
+  size = gameOverText.size();
+  for (int i = 0; i < size; i++) {
+    tmp = gameOverText.back();
+    delete tmp;
+    gameOverText.pop_back();
+  }
   delete selector;
   delete iComponent;
 }
 
 void Menu::Update(float deltaTime) {
+  
   if (active) {
     bool up, down, select;
     if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
@@ -154,6 +197,23 @@ void Menu::Update(float deltaTime) {
     for (int i = 0; i < text.size(); i++) {
       text[i]->Draw();
     }
+    
     selector->Draw();
+  }
+  if (gameOverActive) {
+    gameOverFade += deltaTime;
+    for (int i = 0; i < gameOverText.size(); i++) {
+      if (gameOverFade < 1.0f) {
+        gameOverText[i]->SetColor(gameOverFade * 8.0f / 10.0f, gameOverFade / 10, gameOverFade / 10);
+      }
+      else if (gameOverFade > 3.0f) {
+        float fade = gameOverFade - 3.0f;
+        gameOverText[i]->SetColor(0.8 - (fade * 8.0f / 10.0f), 0.1f - (fade / 10), 0.1f - (fade / 10));
+      }
+      gameOverText[i]->Draw();
+    }
+  }
+  else {
+    gameOverFade = 0.0f;
   }
 }
